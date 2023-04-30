@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f1f1f1;
+		}
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+		}
+		main {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		form {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		input[type="text"] {
+			flex: 1;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			margin-right: 10px;
+		}
+		button {
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: #fff;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+		.chat-box {
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 10px;
+			margin-bottom: 10px;
+			background-color: #fff;
+			overflow-y: auto;
+			max-height: 400px;
+		}
+		.chat-box p {
+			margin: 0;
+			padding: 5px 0;
+			font-size: 14px;
+			line-height: 1.5;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Chat em teste desenvolvido pelo gostosão da Aratuba</h1>
+	</header>
+	<main>
+		<div class="chat-box"></div>
+		<form>
+			<input type="text" placeholder="Digite sua mensagem">
+			<button>Enviar</button>
+		</form>
+	</main>
+
+	<script>
+		let chatBox = document.querySelector('.chat-box');
+		let messageInput = document.querySelector('input[type="text"]');
+		let sendMessageBtn = document.querySelector('button');
+
+		// Conectar ao servidor WebSocket
+		let socket = new WebSocket('ws://localhost:8080');
+
+		// Quando a conexão é estabelecida
+		socket.addEventListener('open', function(event) {
+		    console.log('Conexão estabelecida com o servidor WebSocket');
+		});
+
+		// Quando uma mensagem é recebida
+		socket.addEventListener('message', function(event)
