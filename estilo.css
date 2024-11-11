@@ -1,0 +1,91 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  width: 80%;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+#nome-jogador {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#comecar {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#comecar:hover {
+  background-color: #3e8e41;
+}
+
+#texto {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+#input {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#enviar {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#enviar:hover {
+  background-color: #3e8e41;
+}
+
+#resultado {
+  font-size: 18px;
+  margin-top: 20px;
+  color: #666;
+}
+
+.vermelho {
+  color: #ff0000;
+}
+
+.verde {
+  color: #00ff00;
+}
+
+.azul {
+  color: #222222;
+}
