@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+
+	<head>
+		<title>fastype</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	
+</head>
+
+	
+	<body class="is-preload">
+	    
+		<!-- Wrapper-->
+			<div id="wrapper">
+				<!-- Nav -->
+				<h1 class="cartao digitacao">𝔽𝕒𝕤𝕥𝕪𝕡𝕖</h1>
+				<p></p>
+						
+					<!-- Nav -->
+					<nav id="nav">
+						<a href="#" class="icon solid fa-gamepad"><span>Home</span></a>
+						<a href="#work" class="icon solid fa-medal"><span>Work</span></a>
+						
+					</nav>
+
+	<!-- Main -->
+					<div id="main">
+
+						<!-- Me -->
+							<article id="home" class="panel intro">
+  
+ <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="titulo"><center>JOGAR</center></h1>
+    <input id="nome-jogador" type="text" placeholder="Digite seu @ do Instagram">
+    <select id="frase-escolhida">
+      <option value="">Selecione uma frase</option>
+      <option value="O rato roeu a roupa do rei de Roma.">O rato roeu a roupa do rei de Roma</option>
+      <option value="A vaca malhada foi molhada pela chuva.">A vaca malhada foi molhada pela chuva</option>
+      <option value="O gato escaldado tem medo de água fria.">O gato escaldado tem medo de água fria</option>
+      <option value="A casa caiu sobre o gato.">A casa caiu sobre o gato.</option>
+      <option value="O sol brilha forte no céu azul.">O sol brilha forte no céu azul.</option>
+    </select>
+    <button id="comecar">Começar</button>
+    <p id="texto"></p>
+    <input id="input" type="text" onpaste="return false;" ondrop="return false;">
+    <button id="enviar">Enviar</button>
+    <div id="resultado"></div>
+  </div>
+  <script>
+    const textos = [
+      "O rato roeu a roupa do rei de Roma.",
+      "A vaca malhada foi molhada pela chuva.",
+      "O gato escaldado tem medo de água fria.",
+      "A casa caiu sobre o gato.",
+      "O sol brilha forte no céu azul."
+    ];
+    
+    const nomeJogadorInput = document.getElementById("nome-jogador");
+    const fraseEscolhidaSelect = document.getElementById("frase-escolhida");
+    const comecarButton = document.getElementById("comecar");
+    const textoElement = document.getElementById("texto");
+    const inputElement = document.getElementById("input");
+    const enviarButton = document.getElementById("enviar");
+    const resultadoElement = document.getElementById("resultado");
+    
+    comecarButton.addEventListener("click", () => {
+      const nomeJogador = nomeJogadorInput.value;
+      const fraseEscolhida = fraseEscolhidaSelect.value;
+      
+      if (nomeJogador === "") {
+        alert("Digite seu nome!");
+        return;
+      }
+      
+      if (fraseEscolhida === "") {
+        alert("Selecione uma frase!");
+        return;
+      }
+      
+      textoElement.innerText = fraseEscolhida;
+      inputElement.value = "";
+      inputElement.focus();
+      const startTime = new Date().getTime();
+      let acertos = 0;
+      let erros = 0;
+      
+      enviarButton.addEventListener("click", () => {
+        const digitado = inputElement.value;
+        const endTime = new Date().getTime();
+        const tempo = (endTime - startTime) / 1000;
+const acertos = fraseEscolhida.split("").filter((char, index) => char === digitado[index]).length;
+const erros = fraseEscolhida.length - acertos;
+const velocidade = ((fraseEscolhida.length * (1 - (erros / fraseEscolhida.length))) / tempo).toFixed(2);
+
+resultadoElement.innerHTML = `
+  <p class="azul">Tempo: ${tempo.toFixed(2)} segundos</p>
+  <p class="verde">Acertos: ${acertos}</p>
+  <p class="vermelho">Erros: ${erros}</p>
+ 
+`;
+
+const velocidadeMinha = Math.min(Math.max((velocidade / 60) * 100, 1), 100);
+resultadoElement.innerHTML += `<p class="azul">minha pontuação: ${velocidadeMinha.toFixed(2)}</p>`;
+
+        fetch("https://api.sheetmonkey.io/form/pJZCcZ9aABKDXHJCQmbDrc", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    "nome": nomeJogador,
+    "acertos": acertos,
+    "erros": erros,
+    "tempo": tempo.toFixed(2),
+    "velocidade": (fraseEscolhida.length / tempo * 60).toFixed(2),
+    "mipontuacao": velocidadeMinha // adicionado este parâmetro
+  })
+});
+      });
+    });
+  // Adicione esta função para atualizar a classificação
+  function atualizarClassificacao() {
+    fetch("https://api.sheetmonkey.io/form/pJZCcZ9aABKDXHJCQmbDrc")
+      .then(response => response.json())
+      .then(data => {
+        const rankingBody = document.getElementById("ranking-body");
+        rankingBody.innerHTML = "";
+
+        data.sort((a, b) => b.mipontuacao - a.mipontuacao).forEach((jogador, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${jogador.nome}</td>
+            <td>${jogador.acertos}</td>
+            <td>${jogador.erros}</td>
+            <td>${jogador.tempo}</td>
+            <td>${jogador.velocidade}</td>
+            <td>${jogador.mipontuacao}</td>
+          `;
+          rankingBody.appendChild(row);
+        });
+      });
+  }
+
+
+  </script>
+</article>
+
+   <!-- menu🟢🔴 -->
+
+
+    
+<article id="eventos" class="panel">
+   nenhum evento no momento 
+    </article>   
+    
+<article id="mais..." class="panel">
+ pt>
+    
+    
+    
+    </article>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 🟢Work -->
+							<article id="work" class="panel">
+							    <h1>Classificação</h1>
+  os dados da classificação serão lancados aqui em breve 
+							</article>
+
+	
+<article id="medal" class="panel">
+   
+</article>
+				<!-- Footer -->
+					
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+  const emailList = ["hs362613@gmail.com", "j0yplay3r@gmail.com"];
+  const emailInput = document.getElementById("email");
+  const loginForm = document.getElementById("loginForm");
+
+  loginForm.addEventListener("submit", (e) => {
+    const enteredEmail = emailInput.value;
+    if (!emailList.includes(enteredEmail)) {
+      alert("E-mail inválido. Por favor, tente novamente.");
+      e.preventDefault();
+    }
+  });
+</script>
+
+	</body>
+</html>
