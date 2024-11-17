@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+<link rel"stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	
 </head>
@@ -16,15 +17,13 @@
 			<div id="wrapper">
 				<!-- Nav -->
 				<h1 class="cartao digitacao">𝔽𝕒𝕤𝕥𝕪𝕡𝕖</h1>
-				<p>serviço de movimentação bancária</p>
+				<p>serviço de conta compartilhada</p>
 						
 					<!-- Nav -->
 					<nav id="nav">
-						<a href="#" class="icon solid fa-user"><span>Home</span></a>
-						
-						
-					</nav>
-
+  <a href="#" class="icon solid fa-user"><span>Home</span></a>
+  
+</nav>
 	<!-- Main -->
 					<div id="main">
 
@@ -38,10 +37,10 @@
   document.addEventListener("DOMContentLoaded", () => {
     async function getData() {
       try {
-        const response = await fetch("https://api.zerosheets.com/v1/inw", {
+        const response = await fetch("https://api.zerosheets.com/v1/ao5", {
           method: "GET",
           headers: {
-            Authorization: "Bearer nvg774s0Grkz6ga3nSDIFFIPsOZSKmMP"
+            Authorization: "Bearer qEo6JXerzatMrSY6DVsiR5n3Od668VZw"
           }
         });
         const data = await response.json();
@@ -58,9 +57,17 @@
         divDados.innerHTML = "";
 
         dados.forEach((dado) => {
-  const p = document.createElement("p");
-  p.textContent = `saque: ${dado["saque "]} | Deposito: ${dado["deposito "]}`;
-  divDados.appendChild(p);
+  const pixDiv = document.createElement("div");
+  pixDiv.className = "caixa-valor";
+  pixDiv.textContent = `Pix: ${dado["pix "]}`;
+const saqueDiv = document.createElement("div");
+  saqueDiv.className = "caixa-valor";
+  saqueDiv.textContent = `Saque: ${dado["saque "]} `;
+
+  
+divDados.appendChild(pixDiv);
+  divDados.appendChild(saqueDiv);
+  
 });
       } catch (error) {
         console.error(error);
@@ -103,10 +110,10 @@ const operacao =
 document.getElementById('operacao').value;
 
     if (email && senha) {
-      fetch('https://api.zerosheets.com/v1/nf7', {
+      fetch('https://api.zerosheets.com/v1/k3u', {
   method: 'GET',
   headers: {
-    'Authorization': 'Bearer cguM2nXO4D0niEpMgnrkJnq8VDwy3vqd',
+    'Authorization': 'Bearer qU9cIh2Yr6lMDwtft7qHb10Dbkf72VLu',
     'Content-Type': 'application/json',
   },
 })
@@ -139,7 +146,7 @@ document.getElementById('operacao').value;
   }
 })
 .catch((error) => {
-  alert('Ocorreu um erro ao verificar o email e senha!');
+  alert('estamos passando por atualização no sistema,tente novamente mais tarde');
   console.error(error);
 });
     } else {
