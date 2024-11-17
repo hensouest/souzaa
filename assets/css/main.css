@@ -2330,6 +2330,25 @@ width: 100%;
 }
 }
 
+.caixa-valor {
+  background-color: #C6F4D6;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px; /* adicionei essa linha para adicionar um espaçamento entre as caixinhas */
+  display: inline-block; /* adicionei essa linha para fazer com que as caixinhas fiquem um do lado do outro */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.caixa-valor:hover {
+  background-color: #e0e0e0;
+}
+
+.fa-whatsapp {
+  font-size: 24px;
+  color: #25D366;
+}
+
 @keyframes cursor {
 0% {
 border-right-color: green;
